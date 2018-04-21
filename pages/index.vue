@@ -28,3 +28,10 @@
     </v-flex>
   </v-layout>
 </template>
+
+<style lang="scss" scoped>
+
+.headline {
+  color: red;
+}
+</style>
