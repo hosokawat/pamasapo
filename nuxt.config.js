@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -42,6 +44,18 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+
+      config.plugins.push(
+        new webpack.ProvidePlugin({
+          mapboxgl: 'mapbox-gl'
+        })
+      )
+      config.module.noParse = /(mapbox-gl)\.js$/
     }
-  }
+  },
+  env:{
+    mapbox: {
+      accessToken: 'ここにaccessTokenを記載'
+    }
+  },
 }
