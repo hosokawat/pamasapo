@@ -1,10 +1,12 @@
 <template>
-  <mapbox
-    :access-token="accessToken"
-    :map-options="mapBoxOptions"
-    @map-load="mapLoaded"
-  >
-  </mapbox>
+  <no-ssr>
+    <mapbox
+      :access-token="accessToken"
+      :map-options="mapBoxOptions"
+      @map-load="mapLoaded"
+    >
+    </mapbox>
+  </no-ssr>
 </template>
 
 <script>
@@ -28,44 +30,37 @@
     },
     methods:{
       mapLoaded(map){
-        map.addSource('station', {
-          type: 'geojson',
-          data: './station.geojson',
-          buffer: 0,
-          maxzoom: 12
-        });
-
+        // station
         map.addLayer({
-          "id": "points",
+          "id": 'station',
           "type": "symbol",
-          "source": 'station',
-          'paint': {
-            'circle-color': {
-              property: 'CYC_INJ',
-              type: 'interval',
-              stops: [
-                [1, 'orange'],
-                [2, 'red']
-              ]
-            },
-            'circle-radius': {
-              property: 'CYC_INJ',
-              base: 3,
-              type: 'interval',
-              stops: [
-                [1, 3],
-                [2, 8],
-                [3, 12]
-              ]
-            },
-            'circle-opacity': 0.8,
-            'circle-blur': 0.5
+          "source": {
+            type: 'geojson',
+            data: 'https://raw.githubusercontent.com/codeforchiba/papamama/develop/data/station.geojson',
+          },
+          'layout': {
+            'icon-image': 'rail-15',
+            'text-field': '{station_name}',
+            'text-anchor': 'top',
+            'text-offset': [ 0, 0.6 ]
           },
         });
-        // TODO: マーカーが出ないので試行錯誤中
-        // station.json 自体は読み込んでいるがピンが表示されていないようだ
-        console.log(map);
-        console.log('mapLoaded');
+
+        // nursery
+        map.addLayer({
+          "id": 'nursery',
+          "type": "symbol",
+          "source": {
+            type: 'geojson',
+            data: 'https://raw.githubusercontent.com/codeforchiba/papamama/develop/data/nurseryFacilities.geojson',
+          },
+          'layout': {
+            'icon-image': 'star-15',
+            'text-field': '{Name}',
+            'text-anchor': 'top',
+            'text-offset': [ 0, 0.6 ]
+          },
+        });
       }
     },
   }
