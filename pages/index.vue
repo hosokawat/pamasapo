@@ -1,37 +1,72 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-xs-center">
-        <img src="/v.png" alt="Vuetify.js" class="mb-5" />
-      </div>
-      <v-card>
-        <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template</v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>For more information on Vuetify, check out the <a href="https://vuetifyjs.com" target="_blank">documentation</a>.</p>
-          <p>If you have questions, please join the official <a href="https://chat.vuetifyjs.com/" target="_blank" title="chat">discord</a>.</p>
-          <p>Find a bug? Report it on the github <a href="https://github.com/vuetifyjs/vuetify/issues" target="_blank" title="contribute">issue board</a>.</p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a href="https://nuxtjs.org/" target="_blank">Nuxt Documentation</a>
-          <br>
-          <a href="https://github.com/nuxt/nuxt.js" target="_blank">Nuxt GitHub</a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" flat nuxt to="/inspire">Continue</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <div class="home-view">
+    <v-toolbar dense>
+      <a href="/" class="d-flex ml-2 router-link-active">
+        <img src="logo.png" width="220px" height="32px">
+      </a>
+      <v-text-field
+        v-model="searchKeyword"
+        append-icon="search"
+        type="text"
+        name="input-10-1"
+        placeholder="住所検索..."
+      ></v-text-field>
+    </v-toolbar>
+    <v-layout row class="top-nav">
+      <v-flex xs6 order-lg2>
+        <v-btn depressed block color="location" class="mt-0" v-on:click=locationSearch>
+          <v-icon class="mr-1">location_searching</v-icon>
+          現在位置から探す
+        </v-btn>
+      </v-flex>
+      <v-flex xs6>
+        <v-btn depressed block color="map" class="mt-0" v-on:click=mapSearch>
+          <v-icon class="mr-1">location_on</v-icon>
+          地図から探す
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<script>
+export default {
+  name: 'HomeView',
+  data() {
+    return {
+      searchKeyword: '',
+    };
+  },
+  methods: {
+    locationSearch() {
+      alert("現在位置から探す")
+    },
+    mapSearch() {
+      alert("地図から探す")
+    }
+  }
+};
+</script>
 
-.headline {
-  color: red;
+<style lang="scss" scoped>
+.toolbar {
+  background-color: #fff;
+}
+.location {
+  background-color: #5CD8B7!important;
+  border-color: #5CD8B7!important;
+  color: #fff;
+}
+.map {
+  background-color: #8CC2E3!important;
+  border-color: #8CC2E3!important;
+  color: #fff;
+}
+.top-nav {
+  button {
+    border-radius: 0;
+    height: 45px;
+    font-weight: bold;
+  }
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <v-bottom-nav absolute :value="true">
       <v-btn flat color="teal" value="home" router to="/">
