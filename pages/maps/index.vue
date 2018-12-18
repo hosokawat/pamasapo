@@ -12,7 +12,6 @@
 
 <script>
   import Mapbox from 'mapbox-gl-vue';
-  const mapboxgl=require('mapbox-gl');
   export default {
     name: "index",
     components: {Mapbox},
@@ -67,17 +66,23 @@
 
         map.on('click', 'nursery', function (e) {
           let coordinates = e.features[0].geometry.coordinates.slice();
-          let description = 'e.features[0].properties.description';
-
+          let properties = e.features[0].properties;
+          let popup_contet = `${properties.Name}(${properties.Type}) <br />
+                              住所: ${properties.Address}${(properties.Address2==='null')?'':properties.Address2} <br />
+                              tel: ${properties.Tel} <br />
+                              fax: ${properties.Fax} <br />
+`
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
           // over the copy being pointed to.
           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
           }
+
+          const mapboxgl = require('mapbox-gl');
           new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(description)
+            .setHTML(popup_contet)
             .addTo(map);
         });
       }
