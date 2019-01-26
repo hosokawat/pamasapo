@@ -1,12 +1,17 @@
-# papamama2
+# パマサポ
 
-> next papamama project
+忙しいパパママの子育てを応援するサービス
 
-## Build Setup
+## 開発手順
+
+以下をローカル環境に準備してください。
+
+* Node.js 10.0 以上
+* npm 6.0 以上
 
 ``` bash
 # install dependencies
-$ npm install # Or yarn install
+$ npm ci
 
 # serve with hot reload at localhost:3000
 $ npm run dev
@@ -18,5 +23,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
