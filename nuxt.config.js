@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -11,7 +13,8 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
+      { rel: 'stylesheet', href: 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' }
     ]
   },
   plugins: ['~/plugins/vuetify.js'],
@@ -42,6 +45,18 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+
+      config.plugins.push(
+        new webpack.ProvidePlugin({
+          mapboxgl: 'mapbox-gl'
+        })
+      )
+      config.module.noParse = /(mapbox-gl)\.js$/
     }
-  }
+  },
+  env:{
+    mapbox: {
+      accessToken: process.env.MAPBOX_ACCESS_TOKEN
+    }
+  },
 }
