@@ -1,7 +1,6 @@
 <template>
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
-
       <v-flex xs6>
         <v-select
             :items="items"
@@ -29,7 +28,7 @@
           <v-btn block color="grey lighten-3">新年度</v-btn>
       </v-flex>
 
-    <template v-for="item in lists">
+    <template v-for="item in centers">
       <v-flex xs12 :key="item.name">
         <v-card>
           <v-card-text class="px-0">
@@ -53,47 +52,40 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import Amplify from 'aws-amplify'
-  import appSyncConfig from '../../AppSync'
-  import ChildcareCenterService from '../../services/ChildcareCenterService'
-
-  const amplifyConfig = {
-      'aws_appsync_graphqlEndpoint': appSyncConfig.graphqlEndpoint,
-      'aws_appsync_region': appSyncConfig.region,
-      'aws_appsync_authenticationType': appSyncConfig.authenticationType,
-      'aws_appsync_apiKey': appSyncConfig.apiKey
-  }
-  
-  Amplify.configure(amplifyConfig)
-  Vue.config.productionTip = false
+  import { mapGetters } from 'vuex'
 
   export default {
-    data () {
+    data() {
       return {
         items: ['許認可',
-        '私立・公立',
-        '開園時間',
-        '閉園時間',
-        '24時間',
-        '延長',
-        '一時保育',
-        '夜間・休日',
-        '駐車場'],
+          '私立・公立',
+          '開園時間',
+          '閉園時間',
+          '24時間',
+          '延長',
+          '一時保育',
+          '夜間・休日',
+          '駐車場'],
         items2: ['許認可',
-        '私立・公立',
-        '開園時間',
-        '閉園時間',
-        '24時間',
-        '延長',
-        '一時保育',
-        '夜間・休日',
-        '駐車場'],
-        lists: [],
+          '私立・公立',
+          '開園時間',
+          '閉園時間',
+          '24時間',
+          '延長',
+          '一時保育',
+          '夜間・休日',
+          '駐車場']
       }
     },
-  async mounted () {
-    this.lists = await ChildcareCenterService.getLists()
+
+    computed: {
+      ...mapGetters({
+        centers: 'center/items'
+      })
+    },
+
+    async fetch({ store }) {
+      await store.dispatch('center/search')
     }
   }
 </script>

@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 
 module.exports = {
+  mode: 'spa',
+
   /*
   ** Headers of the page
   */
@@ -17,7 +19,10 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' }
     ]
   },
-  plugins: ['~/plugins/vuetify.js'],
+  plugins: [
+    '~/plugins/vuetify',
+    '~/plugins/appsync'
+  ],
   css: [
     '~/assets/style/app.styl'
   ],
@@ -29,9 +34,6 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    vendor: [
-      '~/plugins/vuetify.js'
-    ],
     extractCSS: true,
     /*
     ** Run ESLint on save
@@ -57,6 +59,13 @@ module.exports = {
   env:{
     mapbox: {
       accessToken: process.env.MAPBOX_ACCESS_TOKEN
-    }
+    },
+    aws: {
+      region: 'ap-northeast-1',
+      appsync: {
+        endpoint: process.env.APPSYNC_ENDPOINT,
+        apiKey: process.env.APPSYNC_API_KEY
+      }
+    },
   },
 }
