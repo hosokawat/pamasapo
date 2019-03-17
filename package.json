@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "aws-amplify": "^1.1.19",
-    "npm": "^6.7.0",
+    "mapbox-gl": "0.53.1",
+    "mapbox-gl-vue": "1.9.0",
     "nuxt": "^1.0.0",
     "vuetify": "^1.0.0"
   },

@@ -3,7 +3,7 @@
     <v-content>
       <nuxt />
     </v-content>
-    <v-bottom-nav absolute :value="true">
+    <v-bottom-nav fixed :value="true">
       <v-btn flat color="teal" value="home" router to="/">
         <span>ホーム</span>
         <v-icon>home</v-icon>
