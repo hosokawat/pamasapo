@@ -1,6 +1,8 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+    <v-dialog v-model="dialog"
+              fullscreen
+              hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="dialog = false">
@@ -62,7 +64,7 @@
   export default {
     data() {
       return {
-        dialog: true,
+        dialog: false,
         notifications: false,
         sound: true,
         widgets: false,
@@ -78,3 +80,9 @@
     }
   }
 </script>
+<style>
+  .v-dialog--fullscreen{
+    height: 70%;
+    top:30%;
+  }
+</style>

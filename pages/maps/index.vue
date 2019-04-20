@@ -1,27 +1,33 @@
 <template>
-  <no-ssr>
-    <mapbox
-      v-if="accessToken"
-      :access-token="accessToken"
-      :map-options="mapBoxOptions"
-      :nav-control="navControl"
-      @map-load="mapLoaded"
-    />
-    <p v-else>mapboxのapikeyが設定されていません。</p>
-  </no-ssr>
+  <div>
+    <Dialo />
+    <no-ssr>
+      <mapbox
+        v-if="accessToken"
+        :access-token="accessToken"
+        :map-options="mapBoxOptions"
+        :nav-control="navControl"
+        @map-load="mapLoaded"
+      />
+      <p v-else>mapboxのapikeyが設定されていません。</p>
+    </no-ssr>
+
+  </div>
 </template>
 
 <script>
   import Mapbox from 'mapbox-gl-vue';
+  import Dialog from '~/components/maps/Dialog.vue'
+
   export default {
     name: "index",
-    components: {Mapbox},
+    components: {Mapbox, Dialog},
     asyncData(context){
       return {
         accessToken: context.env.mapbox.accessToken
       }
     },
-    data() {
+    data: function() {
       return {
         mapBoxOptions: {
           style: 'mapbox://styles/mapbox/streets-v10',
