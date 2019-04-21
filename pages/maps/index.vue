@@ -1,12 +1,13 @@
 <template>
   <no-ssr>
     <mapbox
+      v-if="accessToken"
       :access-token="accessToken"
       :map-options="mapBoxOptions"
       :nav-control="navControl"
       @map-load="mapLoaded"
-    >
-    </mapbox>
+    />
+    <p v-else>mapboxのapikeyが設定されていません。</p>
   </no-ssr>
 </template>
 
