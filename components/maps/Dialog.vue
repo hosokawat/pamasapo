@@ -1,53 +1,33 @@
 <template>
   <v-layout row justify-center>
-    <v-dialog v-model="dialog"
+    <v-dialog v-model="dialogData.dialogShow"
               fullscreen
               hide-overlay transition="dialog-bottom-transition">
       <v-card>
         <v-toolbar dark color="primary">
-          <v-btn icon dark @click="dialog = false">
+          <v-btn icon dark @click="dialogData.dialogShow = false">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>{{title}}</v-toolbar-title>
+          <v-toolbar-title>{{dialogData.title}} ({{dialogData.type}})</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
-        <v-img
-          class="white--text"
-          height="200px"
-          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        >
-        </v-img>
         <v-list three-line subheader>
           <v-list-tile>
             <v-list-tile-content>
-              <v-list-tile-title>名前</v-list-tile-title>
-              <v-list-tile-sub-title>{{title}}</v-list-tile-sub-title>
-              <v-list-tile-sub-title>{{title_kana}}</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>
               <v-list-tile-title>住所</v-list-tile-title>
-              <v-list-tile-sub-title>〒 {{zip}}</v-list-tile-sub-title>
-              <v-list-tile-sub-title>{{address}}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{dialogData.address}}</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>空き情報</v-list-tile-title>
-              <v-list-tile-sub-title>{{aki}}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{dialogData.aki}}</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>時間</v-list-tile-title>
-              <v-list-tile-sub-title>{{start_time}}〜{{end_time}}</v-list-tile-sub-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile>
-            <v-list-tile-content>
-              <v-list-tile-title>その他</v-list-tile-title>
-              <v-list-tile-sub-title>{{other}}</v-list-tile-sub-title>
+              <v-list-tile-sub-title>{{dialogData.start_time}}〜{{dialogData.end_time}}</v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -62,22 +42,7 @@
 </template>
 <script>
   export default {
-    data() {
-      return {
-        dialog: false,
-        notifications: false,
-        sound: true,
-        widgets: false,
-        title: '開発中の画面です。タイトル',
-        title_kana: 'タイトルkana',
-        zip: '123-0001',
-        address: '千葉県松戸市五香1-1-1',
-        aki: '',
-        start_time: '00:00',
-        end_time: '00:00',
-        other: '駐車場なし',
-      }
-    }
+    props: {dialogData: {}},
   }
 </script>
 <style>

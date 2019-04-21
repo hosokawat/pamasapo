@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Dialo />
+    <Dialog :dialog-data="dialogData" />
     <no-ssr>
       <mapbox
         v-if="accessToken"
@@ -35,10 +35,26 @@
           zoom: 10
         },
         navControl: {show: true, position: 'top-right' },
+        dialogData: {
+          dialogShow: false,
+          title: '開発中の画面です。タイトル',
+          address: '千葉県松戸市五香1-1-1',
+          aki: '',
+          start_time: '00:00',
+          end_time: '00:00',
+          type: 'type',
+        }
       }
     },
     methods:{
+      showDialog() {
+        this.dialogData.dialogShow = true
+      },
+      setDialog(key, value) {
+        this.dialogData[key] = value
+      },
       mapLoaded(map){
+        const self = this
         // nursery
         map.addLayer({
           "id": 'nursery',
@@ -74,23 +90,12 @@
         map.on('click', 'nursery', function (e) {
           let coordinates = e.features[0].geometry.coordinates.slice();
           let properties = e.features[0].properties;
-          let popup_contet = `${properties.Name}(${properties.Type}) <br />
-                              住所: ${properties.Address}${(properties.Address2==='null')?'':properties.Address2} <br />
-                              tel: ${properties.Tel} <br />
-                              fax: ${properties.Fax} <br />
-`
-          // Ensure that if the map is zoomed out such that multiple
-          // copies of the feature are visible, the popup appears
-          // over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
-
-          const mapboxgl = require('mapbox-gl');
-          new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(popup_contet)
-            .addTo(map);
+          self.setDialog('title', properties.Name)
+          self.setDialog('address', properties.Address)
+          self.setDialog('start_time', properties.Open)
+          self.setDialog('end_time', properties.Close)
+          self.setDialog('type', properties.Type)
+          self.showDialog()
         });
       }
     },
