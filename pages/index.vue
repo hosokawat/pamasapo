@@ -6,26 +6,14 @@
       </a>
       <v-text-field
         v-model="searchKeyword"
-        append-icon="search"
         type="text"
         name="input-10-1"
         placeholder="住所検索..."
       ></v-text-field>
+      <v-btn flat v-on:click=keywordSearch()>
+        <v-icon>search</v-icon>
+      </v-btn>
     </v-toolbar>
-    <v-layout row class="top-nav">
-      <v-flex xs6 order-lg2>
-        <v-btn depressed block color="location" class="mt-0" v-on:click=locationSearch>
-          <v-icon class="mr-1">location_searching</v-icon>
-          現在位置から探す
-        </v-btn>
-      </v-flex>
-      <v-flex xs6>
-        <v-btn depressed block color="map" class="mt-0" v-on:click=mapSearch>
-          <v-icon class="mr-1">location_on</v-icon>
-          地図から探す
-        </v-btn>
-      </v-flex>
-    </v-layout>
   </div>
 </template>
 
@@ -38,11 +26,9 @@ export default {
     };
   },
   methods: {
-    locationSearch() {
-      alert("現在位置から探す")
-    },
-    mapSearch() {
-      alert("地図から探す")
+    keywordSearch() {
+      alert('検索キーワード「'+this.searchKeyword+'」で検索します。')
+    　this.$router.push({path:'lists'})
     }
   }
 };
@@ -51,22 +37,5 @@ export default {
 <style lang="scss" scoped>
 .toolbar {
   background-color: #fff;
-}
-.location {
-  background-color: #5CD8B7!important;
-  border-color: #5CD8B7!important;
-  color: #fff;
-}
-.map {
-  background-color: #8CC2E3!important;
-  border-color: #8CC2E3!important;
-  color: #fff;
-}
-.top-nav {
-  button {
-    border-radius: 0;
-    height: 45px;
-    font-weight: bold;
-  }
 }
 </style>
