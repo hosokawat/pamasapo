@@ -44,7 +44,7 @@
           <v-card-actions>
             <v-btn block color="amber" @click="toggleFavorites(item.id)">
             <v-icon>favorite</v-icon>
-            お気に入り{{ favoriteList.indexOf(item.id) >= 0 ? 'から削除'　: 'に追加' }}
+            お気に入り{{ favoriteList.includes(item.id) ? 'から削除'　: 'に追加' }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -94,8 +94,7 @@
 
     methods: {
       toggleFavorites: function(id) {
-        console.log(`${id}がお気に入りに追加されました`)
-        if (this.favoriteList.indexOf(id) >= 0) {
+        if (this.favoriteList.includes(id)) {
           this.favoriteList = this.favoriteList.filter(el => el != id)
         } else {
           this.favoriteList.push(id)
@@ -104,12 +103,11 @@
       }
     },
 
-    mounted: function() {
-      const localFavoriteList = localStorage.getItem('favorite')
-      if (localFavoriteList) {
-        this.favoriteList = localFavoriteList
+    created: function() {
+      if (localStorage.getItem('favorite')) {
+        this.favoriteList = JSON.parse(localStorage.getItem('favorite'))
       }
-    }
+    },
 
   }
 </script>
