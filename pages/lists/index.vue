@@ -44,7 +44,7 @@
           <v-card-actions>
             <v-btn block color="amber" @click="toggleFavorites(item.id)">
             <v-icon>favorite</v-icon>
-            お気に入り{{favoriteList.indexOf(item.id) >= 0 ? 'から削除'　: 'に追加'}}
+            お気に入り{{ favoriteList.indexOf(item.id) >= 0 ? 'から削除'　: 'に追加' }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -78,7 +78,7 @@
           '一時保育',
           '夜間・休日',
           '駐車場'],
-          favoriteList: []
+        favoriteList: []
       }
     },
 
@@ -91,6 +91,7 @@
     async fetch({ store }) {
       await store.dispatch('center/search')
     },
+
     methods: {
       toggleFavorites: function(id) {
         console.log(`${id}がお気に入りに追加されました`)
@@ -101,6 +102,14 @@
         }
         localStorage.setItem('favorite', JSON.stringify(this.favoriteList))
       }
+    },
+
+    mounted: function() {
+      const localFavoriteList = localStorage.getItem('favorite')
+      if (localFavoriteList) {
+        this.favoriteList = localFavoriteList
+      }
     }
+
   }
 </script>
