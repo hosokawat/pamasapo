@@ -1,14 +1,14 @@
 <template>
   <div>
     <v-container>
-      <h2>おひさまのお家</h2>
-      <v-chip>認可保育園</v-chip>
-      <v-chip>私立</v-chip>
+      <h2>{{ item.name }}</h2>
+      <v-chip>{{ item.nursery.facility.nurseryType }}</v-chip>
+      <v-chip>{{ item.nursery.facility.ownership }}</v-chip>
       <v-list>
         <v-list-tile>
           <v-list-tile-content>
             <v-list-tile-title>住所</v-list-tile-title>
-            <v-list-tile-sub-title>千葉県松戸市六高台</v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ address }}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile>
@@ -20,29 +20,24 @@
         <v-list-tile>
           <v-list-tile-content>
             <v-list-tile-title>時間</v-list-tile-title>
-            <v-list-tile-sub-title>7:00〜20:00</v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ period }}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile v-if="item.nursery.facility.hasParkingLot">
           <v-list-tile-content>
             <v-list-tile-title>駐車場台数</v-list-tile-title>
-            <v-list-tile-sub-title></v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ item.nursery.facility.numberOfParkingLot }}</v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile>
           <v-btn block>お気に入り</v-btn>
         </v-list-tile>
       </v-list>
-      <no-ssr>
-        <mapbox
-          v-if="accessToken"
-          :access-token="accessToken"
-          :map-options="mapBoxOptions"
-          :nav-control="navControl"
-          @map-load="mapLoaded"
-        />
-        <p v-else>mapboxのapikeyが設定されていません。</p>
-      </no-ssr>
+      <ShowMap
+        :access-token="accessToken"
+        :lat="item.lat"
+        :long="item.long"
+      />
       <v-list>
         <v-list-tile>
           <v-list-tile-content>
@@ -98,14 +93,30 @@
 </template>
 
 <script>
-  import Mapbox from 'mapbox-gl-vue';
+  import ShowMap from '~/components/nurseries/ShowMap'
+  // import * as queries from '~/graphql/queries/get'
 
   export default {
     name: "id",
-    components: {Mapbox},
+    components: {ShowMap},
     asyncData(context) {
+      // TOOD: ここでAPIを叩きitemを更新させる。
+      // const response = await context.$apiClient.query({
+      //   query: queries.get
+      // })
+      // debugger
       return {
         accessToken: context.env.mapbox.accessToken
+      }
+    },
+    computed: {
+      address: function () {
+        const item = this.item
+        return `${item.prefecture}${item.city}${item.ward}${item.address}`
+      },
+      period: function () {
+        const item = this.item
+        return `${item.nursery.facility.openingTime} 〜 ${item.nursery.facility.closingTime}`
       }
     },
     data: function () {
@@ -116,41 +127,50 @@
           zoom: 10
         },
         navControl: {show: true, position: 'top-right'},
-        dialogData: {
-          dialogShow: false,
-          title: '開発中の画面です。タイトル',
-          address: '千葉県松戸市五香1-1-1',
-          aki: '',
-          start_time: '00:00',
-          end_time: '00:00',
-          type: 'type',
+        item: {
+          "id": "0c59666b-c709-48eb-9986-4a00e80c066e",
+          "name": "白旗保育所",
+          "kana": "しらはたほいくじょ",
+          "postalCode": "2600841",
+          "prefecture": "千葉県",
+          "city": "千葉市",
+          "ward": "中央区",
+          "address": "白旗2-6-11",
+          "lat": 35.5783264,
+          "long": 140.1408013,
+          "phone": "0432612916",
+          "fax": "0432647271",
+          "email": null,
+          "website": null,
+          "remarksBasic": null,
+          "nursery": {
+            "facility": {
+              "owner": "千葉市",
+              "ownership": "公立",
+              "nurseryType": "認可保育所",
+              "nurserySubType": null,
+              "openingTime": "7:00",
+              "closingTime": "19:00",
+              "standardOpeningTime": "7:00",
+              "standardClosingTime": "19:00",
+              "shortOpeningTime": "7:00",
+              "shortClosingTime": "19:00",
+              "ageFrom": 0,
+              "ageTo": 5,
+              "capacity1": null,
+              "capacity2": null,
+              "capacity3": null,
+              "areaOfNurseryRoom": null,
+              "hasYard": true,
+              "areaOfYard": null,
+              "hasPool": true,
+              "hasParkingLot": true,
+              "numberOfParkingLot": 2,
+              "remarksFacility": null
+            },
+            "service": null
+          }
         }
-      }
-    },
-    methods: {
-      showDialog() {
-        this.dialogData.dialogShow = true
-      },
-      setDialog(key, value) {
-        this.dialogData[key] = value
-      },
-      mapLoaded(map) {
-        const self = this
-        // nursery
-        map.addLayer({
-          "id": 'nursery',
-          "type": "symbol",
-          "source": {
-            type: 'geojson',
-            data: 'https://raw.githubusercontent.com/codeforchiba/papamama/develop/data/nurseryFacilities.geojson',
-          },
-          'layout': {
-            'icon-image': 'star-15',
-            'text-field': '{Name}',
-            'text-anchor': 'top',
-            'text-offset': [0, 0.6]
-          },
-        });
       }
     },
   }
