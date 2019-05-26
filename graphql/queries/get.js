@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 
+//TODO: このクエリがミスっている
 export const get = gql`
 query getItem{
-  get($id) {
+  get($id:String) {
     id,
     name,
     kana,
