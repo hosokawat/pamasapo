@@ -1,5 +1,5 @@
 {
-  "name": "papamama2",
+  "name": "pamasapo",
   "version": "1.0.0",
   "description": "next papamama project",
   "author": "Code For Chiba",
@@ -13,28 +13,28 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "aws-appsync": "^1.7.2",
-    "graphql-tag": "^2.10.1",
-    "mapbox-gl": "^0.53.1",
-    "mapbox-gl-vue": "^1.9.0",
-    "nuxt": "^2.4.5",
-    "serialize-error": "^3.0.0",
-    "vuetify": "^1.5.6"
+    "aws-appsync": "1.7.2",
+    "graphql-tag": "2.10.1",
+    "mapbox-gl": "0.53.1",
+    "mapbox-gl-vue": "1.9.0",
+    "nuxt": "2.4.5",
+    "serialize-error": "3.0.0",
+    "vuetify": "1.5.6"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^5.15.2",
-    "eslint-friendly-formatter": "^4.0.1",
-    "eslint-loader": "^2.1.2",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "eslint-plugin-vue": "^5.2.2",
-    "node-sass": "^4.8.3",
-    "sass-loader": "^7.0.1",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.2"
+    "babel-eslint": "8.2.6",
+    "eslint": "5.15.2",
+    "eslint-friendly-formatter": "4.0.1",
+    "eslint-loader": "2.1.2",
+    "eslint-plugin-import": "2.15.0",
+    "eslint-plugin-node": "6.0.1",
+    "eslint-plugin-promise": "3.8.0",
+    "eslint-plugin-standard": "3.1.0",
+    "eslint-plugin-vue": "5.2.2",
+    "node-sass": "4.11.0",
+    "sass-loader": "7.1.0",
+    "stylus": "0.54.5",
+    "stylus-loader": "3.0.2"
   },
   "engines": {
     "node": "^10.0.0",
