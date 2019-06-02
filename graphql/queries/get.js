@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
-//TODO: このクエリがミスっている
 export const get = gql`
-query getItem{
-  get($id:String) {
+query getItem($id: ID!){
+  get(id: $id) {
     id,
     name,
     kana,
@@ -19,8 +18,8 @@ query getItem{
     email,
     website,
     remarksBasic,
-    nursery: {
-      facility:{
+    nursery {
+      facility {
         owner,
         ownership,
         nurseryType,
@@ -44,7 +43,7 @@ query getItem{
         numberOfParkingLot,
         remarksFacility
       },
-      service:{
+      service {
         supportMaturnityLeave
       }
     }

@@ -94,19 +94,27 @@
 
 <script>
   import ShowMap from '~/components/nurseries/ShowMap'
-  // import * as queries from '~/graphql/queries/get'
+  import * as queries from '~/graphql/queries/get'
 
   export default {
-    name: "id",
+    name: "nurseries_id",
     components: {ShowMap},
-    asyncData(context) {
-      // TOOD: ここでAPIを叩きitemを更新させる。
-      // const response = await context.$apiClient.query({
-      //   query: queries.get
-      // })
-      // debugger
+    async asyncData({app, params, env}) {
+      const client = app.$apiClient
+
+      // TODO: このpromiseオブジェクトを返す処理を別のレイヤーにまとめた方が処理がきれいになると思います。
+      const promise = client.query({
+        query: queries.get,
+        variables: {id: params.id}
+      })
+
+      const get_data = await promise.then((data) => {
+        return data.data.get
+      })
+
       return {
-        accessToken: context.env.mapbox.accessToken
+        accessToken: env.mapbox.accessToken,
+        item: get_data
       }
     },
     computed: {
@@ -127,50 +135,7 @@
           zoom: 10
         },
         navControl: {show: true, position: 'top-right'},
-        item: {
-          "id": "0c59666b-c709-48eb-9986-4a00e80c066e",
-          "name": "白旗保育所",
-          "kana": "しらはたほいくじょ",
-          "postalCode": "2600841",
-          "prefecture": "千葉県",
-          "city": "千葉市",
-          "ward": "中央区",
-          "address": "白旗2-6-11",
-          "lat": 35.5783264,
-          "long": 140.1408013,
-          "phone": "0432612916",
-          "fax": "0432647271",
-          "email": null,
-          "website": null,
-          "remarksBasic": null,
-          "nursery": {
-            "facility": {
-              "owner": "千葉市",
-              "ownership": "公立",
-              "nurseryType": "認可保育所",
-              "nurserySubType": null,
-              "openingTime": "7:00",
-              "closingTime": "19:00",
-              "standardOpeningTime": "7:00",
-              "standardClosingTime": "19:00",
-              "shortOpeningTime": "7:00",
-              "shortClosingTime": "19:00",
-              "ageFrom": 0,
-              "ageTo": 5,
-              "capacity1": null,
-              "capacity2": null,
-              "capacity3": null,
-              "areaOfNurseryRoom": null,
-              "hasYard": true,
-              "areaOfYard": null,
-              "hasPool": true,
-              "hasParkingLot": true,
-              "numberOfParkingLot": 2,
-              "remarksFacility": null
-            },
-            "service": null
-          }
-        }
+        item: {}
       }
     },
   }
