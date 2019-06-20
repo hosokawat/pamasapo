@@ -19,7 +19,7 @@
     "mapbox-gl-vue": "1.9.0",
     "nuxt": "2.4.5",
     "serialize-error": "3.0.0",
-    "vuetify": "1.5.6"
+    "vuetify": "1.5.16"
   },
   "devDependencies": {
     "babel-eslint": "8.2.6",
