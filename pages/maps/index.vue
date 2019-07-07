@@ -102,9 +102,11 @@
   }
 </script>
 
-<style scoped>
+<style>
   #map {
+    position: absolute;
+    top: 0;
+    bottom: 56px;
     width: 100%;
-    height: 500px;
   }
 </style>
