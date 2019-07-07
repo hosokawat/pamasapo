@@ -42,7 +42,10 @@
           </v-card-text>
           <img alt="写真" src='./image.png'>
           <v-card-actions>
-            <v-btn block color="amber"><v-icon>favorite</v-icon>お気に入りに追加</v-btn>
+            <v-btn block color="amber" @click="toggleFavorites(item.id)">
+            <v-icon>favorite</v-icon>
+            お気に入り{{ favoriteList.includes(item.id) ? 'から削除'　: 'に追加' }}
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -74,7 +77,8 @@
           '延長',
           '一時保育',
           '夜間・休日',
-          '駐車場']
+          '駐車場'],
+        favoriteList: []
       }
     },
 
@@ -86,6 +90,24 @@
 
     async fetch({ store }) {
       await store.dispatch('center/search')
-    }
+    },
+
+    methods: {
+      toggleFavorites: function(id) {
+        if (this.favoriteList.includes(id)) {
+          this.favoriteList = this.favoriteList.filter(el => el != id)
+        } else {
+          this.favoriteList.push(id)
+        }
+        localStorage.setItem('favorite', JSON.stringify(this.favoriteList))
+      }
+    },
+
+    created: function() {
+      if (localStorage.getItem('favorite')) {
+        this.favoriteList = JSON.parse(localStorage.getItem('favorite'))
+      }
+    },
+
   }
 </script>
