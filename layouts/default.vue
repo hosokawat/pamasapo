@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+    <v-content style="margin-bottom: 56px">
       <nuxt />
     </v-content>
     <v-bottom-nav fixed :value="true">
