@@ -36,8 +36,8 @@
       </v-list>
       <ShowMap
         :access-token="accessToken"
+        :lng="item.long"
         :lat="item.lat"
-        :long="item.long"
       />
       <v-list>
         <v-list-tile>
@@ -128,24 +128,9 @@
         return `${item.nursery.facility.openingTime} 〜 ${item.nursery.facility.closingTime}`
       }
     },
-    data: function () {
-      return {
-        mapBoxOptions: {
-          style: 'mapbox://styles/mapbox/streets-v10',
-          center: [140.13217, 35.590360000000004],
-          zoom: 10
-        },
-        navControl: {show: true, position: 'top-right'},
-        item: {}
-      }
-    },
   }
 
 </script>
 
 <style scoped>
-  #map {
-    width: 100%;
-    height: 200px;
-  }
 </style>
