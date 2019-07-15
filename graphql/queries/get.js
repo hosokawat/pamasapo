@@ -44,8 +44,39 @@ query getItem($id: ID!){
         remarksFacility
       },
       service {
-        supportMaturnityLeave
-      }
+        supportMaturnityLeave,
+        saturdayCareService,
+        holidayCareService,
+        temporaryCareService,
+        spotCareService,
+        extendedCareService,
+        nightCareService,
+        h24CareService,
+        provideLunch,
+        lunchWithStaple1,
+        lunchWithStaple2,
+        provideSnacks,
+        provideShuttleBus,
+        useUniform,
+        useSmock,
+        useTrainingWear,
+        remarks,
+      },
+      status {
+        numbers0,
+        numbers1,
+        numbers2,
+        numbers3,
+        numbers4,
+        numbers5,
+        standbys0,
+        standbys1,
+        standbys2,
+        standbys3,
+        standbys4,
+        standbys5,
+        baseDate,
+      }     
     }
   }
 }`
