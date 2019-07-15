@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-container>
+    <v-container v-if="item">
+      <pre>{{item}}</pre>
       <h2>{{ item.name }}</h2>
       <v-chip>{{ item.nursery.facility.nurseryType }}</v-chip>
       <v-chip>{{ item.nursery.facility.ownership }}</v-chip>
@@ -89,6 +90,7 @@
         </v-list-tile>
       </v-list>
     </v-container>
+    <p v-else>保育園のデータが取得できませんでした。</p>
   </div>
 </template>
 
@@ -102,7 +104,6 @@
     async asyncData({app, params, env}) {
       const client = app.$apiClient
 
-      // TODO: このpromiseオブジェクトを返す処理を別のレイヤーにまとめた方が処理がきれいになると思います。
       const promise = client.query({
         query: queries.get,
         variables: {id: params.id}
