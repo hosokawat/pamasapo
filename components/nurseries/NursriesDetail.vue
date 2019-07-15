@@ -80,7 +80,7 @@
             <v-list-tile-content>{{ item.nursery.facility.numberOfParkingLot }}台</v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
-            <v-btn block>お気に入り</v-btn>
+            <FavoriteButton :id="item.id" />
           </v-list-tile>
         </v-list>
         <ShowMap
@@ -397,10 +397,11 @@
 </template>
 <script>
   import ShowMap from '~/components/nurseries/ShowMap'
+  import FavoriteButton from "./FavoriteButton";
 
   export default {
     name: 'NursriesDetail',
-    components: {ShowMap},
+    components: {FavoriteButton, ShowMap},
     props: {
       item: {},
       accessToken: {type: String, required: true},
