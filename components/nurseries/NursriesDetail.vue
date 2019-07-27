@@ -397,7 +397,7 @@
 </template>
 <script>
   import ShowMap from '~/components/nurseries/ShowMap'
-  import FavoriteButton from "./FavoriteButton";
+  import FavoriteButton from "../FavoriteButton";
 
   export default {
     name: 'NursriesDetail',
