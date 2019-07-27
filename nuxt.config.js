@@ -21,7 +21,8 @@ module.exports = {
   },
   plugins: [
     '~/plugins/vuetify',
-    '~/plugins/appsync'
+    '~/plugins/appsync',
+    {src: '~/plugins/localStorage.js', ssr: false},
   ],
   css: [
     '~/assets/style/app.styl'
