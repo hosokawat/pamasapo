@@ -18,31 +18,14 @@
     },
     methods: {
       can_favorited: function () {
-        return !(this.favoriteList().includes(this.id))
-      },
-      favoriteList: function () {
-        if (localStorage.getItem('favorite')) {
-          return JSON.parse(localStorage.getItem('favorite'))
-        } else {
-          return []
-        }
+        return !(this.$store.state.favorite.items.includes(this.id))
       },
       add_favorite: function () {
-        debugger
-        const value = this.favoriteList().push(this.id);
-        localStorage.setItem('favorite', JSON.stringify(value))
+        this.$store.commit('favorite/add', this.id)
       },
       remove_favorite: function () {
-        debugger
-        const id = this.id
-        const value = this.favoriteList().filter(e => el != id)
-        localStorage.setItem('favorite', JSON.stringify(value))
+        this.$store.commit('favorite/remove', this.id)
       }
     },
-    // created: function() {
-    //   if (localStorage.getItem('favorite')) {
-    //     this.favoriteList = JSON.parse(localStorage.getItem('favorite'))
-    //   }
-    // },
   }
 </script>
