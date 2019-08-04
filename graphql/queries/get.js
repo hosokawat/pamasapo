@@ -75,6 +75,12 @@ query getItem($id: ID!){
         standbys3,
         standbys4,
         standbys5,
+        availability0,
+        availability1,
+        availability2,
+        availability3,
+        availability4,
+        availability5,
         baseDate,
       }     
     }

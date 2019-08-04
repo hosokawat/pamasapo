@@ -25,37 +25,37 @@
             <v-flex xs3>
               <v-list-tile-title></v-list-tile-title>
             </v-flex>
-            <v-list-tile-content>0歳 {{this.item.nursery.status.availability_0}}</v-list-tile-content>
+            <v-list-tile-content>0歳 {{this.item.nursery.status.availability0}}</v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-flex xs3>
               <v-list-tile-title></v-list-tile-title>
             </v-flex>
-            <v-list-tile-content>1歳 {{this.item.nursery.status.availability_1}}</v-list-tile-content>
+            <v-list-tile-content>1歳 {{this.item.nursery.status.availability1}}</v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-flex xs3>
               <v-list-tile-title></v-list-tile-title>
             </v-flex>
-            <v-list-tile-content>2歳 {{this.item.nursery.status.availability_2}}</v-list-tile-content>
+            <v-list-tile-content>2歳 {{this.item.nursery.status.availability2}}</v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-flex xs3>
               <v-list-tile-title></v-list-tile-title>
             </v-flex>
-            <v-list-tile-content>3歳 {{this.item.nursery.status.availability_3}}</v-list-tile-content>
+            <v-list-tile-content>3歳 {{this.item.nursery.status.availability3}}</v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-flex xs3>
               <v-list-tile-title></v-list-tile-title>
             </v-flex>
-            <v-list-tile-content>4歳 {{this.item.nursery.status.availability_4}}</v-list-tile-content>
+            <v-list-tile-content>4歳 {{this.item.nursery.status.availability4}}</v-list-tile-content>
           </v-list-tile>
           <v-list-tile>
             <v-flex xs3>
               <v-list-tile-title></v-list-tile-title>
             </v-flex>
-            <v-list-tile-content>5歳 {{this.item.nursery.status.availability_5}}</v-list-tile-content>
+            <v-list-tile-content>5歳 {{this.item.nursery.status.availability5}}</v-list-tile-content>
           </v-list-tile>
 
           <v-list-tile>
@@ -481,17 +481,15 @@
       availability_summary: function () {
         const status = this.item.nursery.status
         const availabilities = [
-          status['availability_0'],
-          status['availability_1'],
-          status['availability_2'],
-          status['availability_3'],
-          status['availability_4'],
-          status['availability_5']
+          status['availability0'],
+          status['availability1'],
+          status['availability2'],
+          status['availability3'],
+          status['availability4'],
+          status['availability5']
         ]
-        // すべてのitemsが✕でなければ空きあり
-        const is_available = !(availabilities.every((item) => {
-          return item === '✕'
-        }))
+        // すべてのitemsが×でなければ空きあり
+        const is_available = !(availabilities.every((item) => item === '×'))
         return (is_available) ? 'あり' : 'なし'
       }
     },
