@@ -40,7 +40,7 @@
             <span v-if='item.number_of_parking_lot>0'>駐車場 あり{{ item.number_of_parking_lot }}台</span>
             <span v-else>駐車場 なし</span>
           </v-card-text>
-          <img alt="写真" src='./image.png'>
+          <img alt="写真" src='image.png'>
           <v-card-actions>
             <v-btn block color="amber" @click="toggleFavorites(item.id)">
             <v-icon>favorite</v-icon>
