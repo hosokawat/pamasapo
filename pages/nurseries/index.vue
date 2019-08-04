@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <v-flex xs6>
         <v-select
-          :items="items"
+          :items="filter_items"
           label="絞り込み"
           multiple
           chips
@@ -13,7 +13,7 @@
 
       <v-flex xs6>
         <v-select
-          :items="items2"
+          :items="sort_items"
           label="並び替え"
           chips
           box
@@ -60,7 +60,7 @@
   export default {
     data() {
       return {
-        items: ['許認可',
+        filter_items: ['許認可',
           '私立・公立',
           '開園時間',
           '閉園時間',
@@ -69,7 +69,7 @@
           '一時保育',
           '夜間・休日',
           '駐車場'],
-        items2: ['許認可',
+        sort_items: ['許認可',
           '私立・公立',
           '開園時間',
           '閉園時間',
