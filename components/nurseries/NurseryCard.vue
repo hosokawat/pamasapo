@@ -11,6 +11,7 @@
     </v-card-text>
     <img alt="写真" src='~assets/image.png'>
     <v-card-actions>
+      <v-btn block :to="{ name: 'nurseries-id', params: { id: item.id }}">詳細表示</v-btn>
       <FavoriteButton :id="item.id" />
     </v-card-actions>
   </v-card>
