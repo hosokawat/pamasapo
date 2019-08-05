@@ -19,7 +19,8 @@
           box
         ></v-select>
       </v-flex>
-
+    </v-layout>
+    <v-layout row wrap>
       <v-flex xs6>
         <v-btn block color="grey lighten-3">常時</v-btn>
       </v-flex>
@@ -27,37 +28,21 @@
       <v-flex xs6>
         <v-btn block color="grey lighten-3">新年度</v-btn>
       </v-flex>
-
-      <template v-for="item in centers">
-        <v-flex xs12 :key="item.name" v-if="favoriteList.includes(item.id)">
-          <v-card>
-            <v-card-text class="px-0">
-              <span>保育所かな　{{ item.kana }}</span><br>
-              <span class='headline'>保育所名　{{ item.name }}</span><br>
-              <span>住所　{{ item.postalCode + item.prefecture + item.city + item.ward + item.address }}</span><br>
-              <span>空き状況({{ item.base_date }})</span><br>
-              <span>開園時間　{{ item.openingTime }}から{{ item.openingTime }}まで</span><br>
-              <span v-if='item.number_of_parking_lot>0'>駐車場 あり{{ item.number_of_parking_lot }}台</span>
-              <span v-else>駐車場 なし</span>
-            </v-card-text>
-            <img alt="写真" src='./image.png'>
-            <v-card-actions>
-              <v-btn block color="amber" @click="toggleFavorites(item.id)">
-                <v-icon>favorite</v-icon>
-                お気に入りから削除
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </template>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex xs12 v-for="item in favorite_nursery_items()" :key="item.id">
+        <NurseryCard :item="item" />
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  import NurseryCard from "~/components/nurseries/NurseryCard";
 
   export default {
+    components: {NurseryCard},
     data() {
       return {
         filter_items: ['許認可',
@@ -78,32 +63,24 @@
           '一時保育',
           '夜間・休日',
           '駐車場'],
-        favoriteList: []
       }
     },
-
     computed: {
       ...mapGetters({
-        centers: 'center/items'
-      })
-    },
-
-    async fetch({store}) {
-      await store.dispatch('center/search')
+        nursery_filter_items: 'nursery/filter_items',
+        favorite_items: 'favorite/items',
+      }),
     },
 
     methods: {
-      toggleFavorites: function (id) {
-        this.favoriteList = this.favoriteList.filter(el => el != id)
-        localStorage.setItem('favorite', JSON.stringify(this.favoriteList))
-      }
+      favorite_nursery_items: function () {
+        const ids = this.favorite_items
+        return this.nursery_filter_items(ids)
+      },
     },
 
-    created: function () {
-      if (localStorage.getItem('favorite')) {
-        this.favoriteList = JSON.parse(localStorage.getItem('favorite'))
-      }
+    async fetch({store}) {
+      await store.dispatch('nursery/search')
     },
-
   }
 </script>
