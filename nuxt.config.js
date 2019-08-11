@@ -24,9 +24,6 @@ module.exports = {
     '~/plugins/appsync',
     {src: '~/plugins/localStorage.js', ssr: false},
   ],
-  css: [
-    '~/assets/style/app.styl'
-  ],
   /*
   ** Customize the progress bar color
   */
@@ -36,6 +33,11 @@ module.exports = {
   */
   build: {
     extractCSS: true,
+    plugins: [
+      new webpack.ProvidePlugin({
+        mapboxgl: 'mapbox-gl'
+      })
+    ],
     /*
     ** Run ESLint on save
     */
@@ -49,14 +51,12 @@ module.exports = {
         })
       }
 
-      config.plugins.push(
-        new webpack.ProvidePlugin({
-          mapboxgl: 'mapbox-gl'
-        })
-      )
       config.module.noParse = /(mapbox-gl)\.js$/
     }
   },
+  devModules: [
+    '@nuxtjs/vuetify'
+  ],
   env:{
     mapbox: {
       accessToken: process.env.MAPBOX_ACCESS_TOKEN
