@@ -7,7 +7,7 @@
           label="絞り込み"
           multiple
           chips
-          box
+          filled
         ></v-select>
       </v-flex>
 
@@ -16,7 +16,7 @@
           :items="sort_items"
           label="並び替え"
           chips
-          box
+          filled
         ></v-select>
       </v-flex>
     </v-layout>
