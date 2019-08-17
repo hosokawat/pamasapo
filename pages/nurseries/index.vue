@@ -30,7 +30,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex xs12 v-for="item in favorite_nursery_items()" :key="item.id">
+      <v-flex xs12 v-for="item in centers" :key="item.name">
         <NurseryCard :item="item" />
       </v-flex>
     </v-layout>
@@ -39,13 +39,14 @@
 
 <script>
   import {mapGetters} from 'vuex'
-  import NurseryCard from "~/components/nurseries/NurseryCard";
+  import NurseryCard from "~/components/nurseries/NurseryCard.vue"
 
   export default {
     components: {NurseryCard},
     data() {
       return {
-        filter_items: ['許認可',
+        filter_items: [
+          '許認可',
           '私立・公立',
           '開園時間',
           '閉園時間',
@@ -53,8 +54,10 @@
           '延長',
           '一時保育',
           '夜間・休日',
-          '駐車場'],
-        sort_items: ['許認可',
+          '駐車場'
+        ],
+        sort_items: [
+          '許認可',
           '私立・公立',
           '開園時間',
           '閉園時間',
@@ -62,25 +65,19 @@
           '延長',
           '一時保育',
           '夜間・休日',
-          '駐車場'],
+          '駐車場'
+        ],
       }
     },
+
     computed: {
       ...mapGetters({
-        nursery_filter_items: 'nursery/filter_items',
-        favorite_items: 'favorite/items',
-      }),
-    },
-
-    methods: {
-      favorite_nursery_items: function () {
-        const ids = this.favorite_items
-        return this.nursery_filter_items(ids)
-      },
+        centers: 'center/items'
+      })
     },
 
     async fetch({store}) {
-      await store.dispatch('nursery/search')
+      await store.dispatch('center/search')
     },
   }
 </script>
