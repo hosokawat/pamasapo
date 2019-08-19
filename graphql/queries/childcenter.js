@@ -5,18 +5,29 @@ export const search = gql`
     search {
       items {
         id
-		    name
+        name
         kana
-		    postalCode
+        postalCode
         prefecture
         city
         ward
         address
         nursery {
           facility {
-    	      openingTime
-    	    }
-      	} 
+            nurseryType
+            openingTime
+            closingTime
+            hasParkingLot
+            numberOfParkingLot
+          }
+          service{
+            temporaryCareService
+            spotCareService
+            extendedCareService
+            nightCareService
+            h24CareService
+          }
+        } 
       }
     }
   }
