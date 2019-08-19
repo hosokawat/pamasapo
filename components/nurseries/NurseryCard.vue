@@ -13,8 +13,8 @@
     <v-card-text>
       <span>住所　{{ item.postalCode + item.prefecture + item.city + item.ward + item.address }}</span><br>
       <span>空き状況({{ item.base_date }})</span><br>
-      <span>開園時間　{{ item.openingTime }}から{{ item.openingTime }}まで</span><br>
-      <span v-if='item.number_of_parking_lot>0'>駐車場 あり{{ item.number_of_parking_lot }}台</span>
+      <span>開園時間　{{ item.nursery.facility.openingTime }}から{{ item.nursery.facility.closingTime }}まで</span><br>
+      <span v-if='item.nursery.facility.numberOfParkingLot>0'>駐車場 あり{{ item.nursery.facility.numberOfParkingLot }}台</span>
       <span v-else>駐車場 なし</span>
     </v-card-text>
     <v-card-actions>
