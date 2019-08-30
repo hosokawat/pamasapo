@@ -150,12 +150,15 @@
             <FavoriteButton :id="item.id" />
           </v-list-item>
         </v-list>
-        <ShowMap
-          :access-token="accessToken"
-          :lng="item.long"
-          :lat="item.lat"
-        />
-
+        <v-list>
+          <v-list-item>
+            <ShowMap
+              :access-token="accessToken"
+              :lng="item.long"
+              :lat="item.lat"
+            />
+          </v-list-item>
+        </v-list>
         <v-subheader>施設</v-subheader>
         <v-list dense>
           <v-list-item>
