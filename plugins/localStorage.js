@@ -1,10 +1,10 @@
 import createPersistedState from 'vuex-persistedstate'
 
-export default ({store}) => {
+export default ({ store }) => {
   window.onNuxtReady(() => {
     createPersistedState({
       key: 'vuex',
-      paths: ["favorite.items"],
+      paths: ["favorite.items", "recent.items"],
     })(store)
   })
 }
