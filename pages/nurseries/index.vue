@@ -1,6 +1,13 @@
 <template>
-  <v-container grid-list-md text-xs-center>
-    <v-layout row wrap>
+  <v-container
+    grid-list-md
+    text-xs-center
+    pa-0
+  >
+    <v-layout
+      row
+      wrap
+    >
       <v-flex xs6>
         <v-select
           :items="filter_items"
@@ -8,7 +15,8 @@
           multiple
           chips
           filled
-        ></v-select>
+          prepend-inner-icon="filter_list"
+        />
       </v-flex>
 
       <v-flex xs6>
@@ -17,21 +25,41 @@
           label="並び替え"
           chips
           filled
-        ></v-select>
+        />
       </v-flex>
     </v-layout>
-    <v-layout row wrap>
+    <v-layout
+      row
+      wrap
+    >
       <v-flex xs6>
-        <v-btn block color="grey lighten-3">常時</v-btn>
+        <v-btn
+          block
+          color="grey lighten-3"
+        >
+          常時
+        </v-btn>
       </v-flex>
 
       <v-flex xs6>
-        <v-btn block color="grey lighten-3">新年度</v-btn>
+        <v-btn
+          block
+          color="grey lighten-3"
+        >
+          新年度
+        </v-btn>
       </v-flex>
     </v-layout>
-    <v-layout row wrap>
-      <v-flex xs12 v-for="item in centers" :key="item.name">
-        <NurseryCard :item="item" />
+    <v-layout
+      row
+      wrap
+    >
+      <v-flex
+        v-for="item in centers"
+        :key="item.name"
+        xs12
+      >
+        <nursery-card :item="item" />
       </v-flex>
     </v-layout>
   </v-container>
@@ -42,7 +70,9 @@
   import NurseryCard from "~/components/nurseries/NurseryCard.vue"
 
   export default {
-    components: {NurseryCard},
+    components: {
+      NurseryCard
+    },
     data() {
       return {
         filter_items: [
