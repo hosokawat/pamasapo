@@ -1,19 +1,20 @@
+
 export const state = () => ({
-  items: []
+  items: [],
+  limitLength: 5// context.env.recent.limitLength
 })
 
 export const getters = {
   items: state => {
     return state.items
   },
+
 }
 
 
 export const mutations = {
   add(state, id) {
-    state.items.push(id)
-  },
-  remove(state, id) {
-    state.items.splice(state.items.indexOf(id), 1)
+    state.items.unshift({ id: id, timestamp: new Date() });
+    state.items = state.items.slice(0, state.limitLength)
   },
 }
